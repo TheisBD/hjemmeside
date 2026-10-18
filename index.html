@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Theis Dynnesen</title>
+<meta name="description" content="Elevbehandlinger i kropsterapi på Frederiksberg ved Theis Dynnesen, Manuvision elev og psykologistuderende.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
+<style>
+/* Layout: brevpapir. Navn og sted øverst til venstre, én sætning og en stipletegning,
+   derefter et opslag i to spalter som i en bog. Ingen knapper, kun tekst og links.
+   Bevidst ét lyst tema: papir og blæk. */
+:root {
+  --paper: #fafaf7;
+  --ink: #1c1c1a;
+  --ink-soft: #55554f;
+  --tone: #ecebe5;
+  --font-text: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 760px) { body { font-size: 1.125rem; } }
+
+.page {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 1.25rem 3rem;
+}
+@media (min-width: 760px) {
+  .page {
+    padding-left: max(32px, env(safe-area-inset-left, 0px));
+    padding-right: max(32px, env(safe-area-inset-right, 0px));
+    padding-block: 2rem 4rem;
+  }
+}
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+p { margin: 0; }
+
+/* Brevhoved */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem 2rem;
+}
+.letterhead { line-height: 1.35; }
+.toplinks { display: grid; gap: 0.35rem; justify-items: end; }
+.toplinks nav { display: flex; gap: 1.25rem; }
+.draftnote { font-size: 0.875rem; font-style: italic; color: var(--ink-soft); }
+@media (max-width: 559px) { .toplinks { justify-items: start; } }
+
+/* Åbning */
+.opening {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: clamp(2.5rem, 8vw, 5.5rem) clamp(2rem, 6vw, 4.5rem);
+}
+@media (min-width: 860px) {
+  .opening { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.words { display: grid; gap: 1.1rem; max-width: 30rem; }
+.motto {
+  font-style: italic;
+  font-weight: 350;
+  font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.1rem);
+  line-height: 1.15;
+  max-width: 17ch;
+  text-wrap: balance;
+}
+.drawing { margin: 0; justify-self: center; width: 100%; max-width: 34rem; }
+.drawing canvas { display: block; width: 100%; aspect-ratio: 1 / 1; max-width: 100%; }
+
+/* Opslaget */
+.spread { display: grid; gap: 2.75rem 4.5rem; }
+@media (min-width: 900px) {
+  .spread { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.col { min-width: 0; max-width: 34rem; display: grid; gap: 2rem; align-content: start; }
+.col section { display: grid; gap: 0.6rem; }
+.col h2 { margin: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.25; }
+.portrait {
+  width: 100%;
+  max-width: 22rem;
+  aspect-ratio: 4 / 5;
+  background: var(--tone);
+  display: grid;
+  place-items: center;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.prices { list-style: none; margin: 0; padding: 0; font-variant-numeric: tabular-nums; }
+.prices li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.3rem;
+  border-bottom: 1px dotted var(--ink-soft);
+}
+.note { font-size: 0.95em; color: var(--ink-soft); }
+.tbd { font-style: italic; color: var(--ink-soft); }
+
+footer {
+  margin-top: clamp(3rem, 8vw, 5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="page" lang="da">
+  <header class="top">
+    <p class="letterhead">Theis Dynnesen<br>Manuvision elev<br>Psykologistuderende, Københavns Universitet<br>Frederiksberg</p>
+    <div class="toplinks">
+      <nav aria-label="Genveje">
+        <a href="#book">Find en tid</a>
+        <a href="https://www.instagram.com/theis.dynnesen/">Instagram</a>
+      </nav>
+      <p class="draftnote">Udkast. Tekst i [klammer] mangler.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="opening">
+      <div class="words">
+        <p class="motto">Nogle steder i os selv finder vi kun ved at mærke efter.</p>
+        <p>Jeg giver elevbehandlinger i kropsterapi på Frederiksberg. En behandling varer 75 minutter.</p>
+        <p><a href="#book">Find en tid her.</a></p>
+      </div>
+      <figure class="drawing">
+        <canvas id="stipple" aria-hidden="true"></canvas>
+      </figure>
+    </div>
+
+    <div class="spread">
+      <div class="col">
+        <section>
+          <h2>Hvad er en elevbehandling?</h2>
+          <p>Jeg er Manuvision elev og giver Manuvision Elev kropsterapeutiske behandlinger som en del af min uddannelse. Derfor er prisen lavere end hos en færdiguddannet kropsterapeut.</p>
+          <p>Jeg arbejder med massage, berøring og åndedræt, og vi taler sammen, hvis du har lyst. <strong>Du kan komme med noget bestemt eller bare med lyst til at mærke efter.</strong></p>
+        </section>
+        <section>
+          <h2>Hvordan foregår det?</h2>
+          <p>Vi starter med en snak om, hvordan du har det, og hvad du har lyst til i dag. Derefter ligger du på briksen i undertøj under et tæppe. <strong>Du bestemmer hele tiden</strong>, og vi kan stoppe eller gøre noget andet når som helst.</p>
+          <p>Til sidst får du tid til at lande, og vi taler kort om, hvad du har mærket.</p>
+        </section>
+        <section>
+          <h2>Hvad hvis jeg bliver ked af det?</h2>
+          <p>Så er der plads til det. Følelser kan dukke op, når man giver kroppen opmærksomhed, og du behøver ikke forklare dig.</p>
+        </section>
+        <section>
+          <h2>Er du psykolog?</h2>
+          <p>Nej. Jeg læser psykologi, men behandlingerne er kropsterapi og ikke psykologbehandling. Kropsterapi erstatter heller ikke en læge. Har du symptomer, du er bekymret for, så tal med din læge.</p>
+        </section>
+      </div>
+
+      <div class="col">
+        <div class="portrait">[Foto af dig]</div>
+        <section>
+          <h2>Hvem er jeg?</h2>
+          <p>Jeg hedder Theis. Jeg læser psykologi på Københavns Universitet og er Manuvision elev. Ved siden af er jeg musiker og lydtekniker, og mindfulness og dans fylder meget i mit liv.</p>
+          <p class="tbd">[Et par linjer med dine egne ord om, hvorfor du arbejder med kroppen.]</p>
+        </section>
+        <section>
+          <h2>Pris</h2>
+          <ul class="prices">
+            <li><span>Første behandling</span><span>350 kr.</span></li>
+            <li><span>Studerende og lav indkomst</span><span>350 kr.</span></li>
+            <li><span>Øvrige behandlinger</span><span>450 kr.</span></li>
+          </ul>
+          <p class="note">Alle behandlinger varer 75 minutter og foregår på Frederiksberg. Du får adressen, når du booker. Betaling: <span class="tbd">[MobilePay?]</span> Afbud: <span class="tbd">[senest 24 timer før?]</span></p>
+        </section>
+        <section id="book">
+          <h2>Find en tid</h2>
+          <p class="tbd">[Her kommer et link til kalenderen, hvor du vælger en ledig tid.]</p>
+          <p>Spørgsmål først? Skriv til mig på Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, eller på <span class="tbd">[din e-mail]</span>.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>Theis Dynnesen</span>
+    <span>Manuvision elev</span>
+    <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>
+    <a href="https://manuvision.dk/hvad-er-manuvision-kropsterapi/">Læs om Manuvision kropsterapi på manuvision.dk</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var canvas = document.getElementById("stipple");
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext("2d");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var ink = getComputedStyle(document.documentElement).getPropertyValue("--ink").trim() || "#1c1c1a";
+
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  /* Prikkerne beregnes én gang: en organisk form med højdekurver, som et kort over et landskab. */
+  var DOMAIN = 1.2;
+  var dots = (function () {
+    var rand = rng(1997), out = [];
+    function radius(a) { return 0.78 + 0.07 * Math.sin(2 * a + 0.6) + 0.05 * Math.sin(3 * a + 1.7) + 0.025 * Math.sin(5 * a + 0.2); }
+    function wobble(x, y) { return (Math.sin(1.9 * x + 0.3) + Math.sin(1.4 * y + 1.1) + 0.6 * Math.sin(2.6 * (x + y) + 2.0) + 0.4 * Math.sin(3.3 * x - 2.8 * y + 0.5)) / 3; }
+    var LINES = 9;
+    for (var i = 0; i < 90000; i++) {
+      var x = (rand() * 2 - 1) * DOMAIN, y = (rand() * 2 - 1) * DOMAIN;
+      var r = Math.sqrt(x * x + y * y), a = Math.atan2(y, x);
+      var h = r / radius(a) + 0.12 * wobble(2.2 * x, 2.2 * y);
+      if (h > 1) continue;
+      var f = h * LINES, d = Math.abs(f - Math.round(f));
+      var p = 0.025 + 0.85 * Math.exp(-(d * d) / 0.0036) + (h > 0.93 ? 0.5 : 0);
+      if (rand() < p) out.push([x, y, 0.55 + rand() * 0.9, 0.5 + rand() * 0.4]);
+    }
+    return out;
+  })();
+
+  var size = 0, raf = 0, last = 0, visible = true, start = performance.now();
+
+  function resize() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    size = canvas.clientWidth;
+    canvas.width = Math.round(size * dpr);
+    canvas.height = Math.round(size * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  /* 0 = udåndet, 1 = indåndet. Indånding 4 s, udånding 6 s. */
+  function breath(t) {
+    var p = t % 10000;
+    if (p < 4000) return 0.5 - 0.5 * Math.cos(Math.PI * p / 4000);
+    return 0.5 + 0.5 * Math.cos(Math.PI * (p - 4000) / 6000);
+  }
+  function draw(level) {
+    var half = size / 2, s = (half / DOMAIN) * (0.955 + 0.035 * level);
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = ink;
+    for (var i = 0; i < dots.length; i++) {
+      var d = dots[i];
+      ctx.globalAlpha = d[3];
+      ctx.fillRect(half + d[0] * s, half + d[1] * s, d[2], d[2]);
+    }
+    ctx.globalAlpha = 1;
+  }
+  function frame(now) {
+    if (now - last > 33) { draw(breath(now - start)); last = now; }
+    raf = requestAnimationFrame(frame);
+  }
+  function render() {
+    cancelAnimationFrame(raf);
+    resize();
+    draw(reduce.matches ? 0.5 : breath(performance.now() - start));
+    if (!reduce.matches && visible) raf = requestAnimationFrame(frame);
+  }
+
+  window.addEventListener("resize", render);
+  if (reduce.addEventListener) reduce.addEventListener("change", render);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible && !reduce.matches) { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); }
+      else cancelAnimationFrame(raf);
+    }).observe(canvas);
+  }
+  render();
+})();
+</script>
+</body>
+</html>
