@@ -11,7 +11,7 @@
 <style>
 /* Layout: brevpapir. Navn og sted øverst til venstre, én sætning og en stipletegning,
    derefter et opslag i to spalter som i en bog. Ingen knapper, kun tekst og links.
-   Bevidst ét lyst tema: papir og blæk. */
+   Bevidst ét lyst tema: papir og blæk. Dansk og engelsk i samme side. */
 :root {
   --paper: #fafaf7;
   --ink: #1c1c1a;
@@ -50,6 +50,10 @@ body {
   }
 }
 
+/* Sprog: kun det aktive sprog vises */
+.page[data-lang="da"] [data-l="en"],
+.page[data-lang="en"] [data-l="da"] { display: none !important; }
+
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
@@ -65,9 +69,26 @@ p { margin: 0; }
 }
 .letterhead { line-height: 1.35; }
 .toplinks { display: grid; gap: 0.35rem; justify-items: end; }
-.toplinks nav { display: flex; gap: 1.25rem; }
+.toplinks nav { display: flex; align-items: center; gap: 1.25rem; }
 .draftnote { font-size: 0.875rem; font-style: italic; color: var(--ink-soft); }
 @media (max-width: 559px) { .toplinks { justify-items: start; } }
+.langswitch {
+  appearance: none;
+  margin: 0;
+  padding: 0.2rem;
+  border: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+.langswitch svg {
+  display: block;
+  width: 1.6rem;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(28, 28, 26, 0.2);
+}
+.langswitch:hover svg { box-shadow: 0 0 0 1px var(--ink); }
 
 /* Åbning */
 .opening {
@@ -118,7 +139,6 @@ p { margin: 0; }
   border-bottom: 1px dotted var(--ink-soft);
 }
 .note { font-size: 0.95em; color: var(--ink-soft); }
-.tbd { font-style: italic; color: var(--ink-soft); }
 
 footer {
   margin-top: clamp(3rem, 8vw, 5rem);
@@ -131,24 +151,33 @@ footer {
 </style>
 </head>
 <body>
-<div class="page" lang="da">
+<div class="page" lang="da" data-lang="da">
   <header class="top">
-    <p class="letterhead">Theis Dynnesen<br>Manuvision elev<br>Psykologistuderende, Københavns Universitet<br>Frederiksberg</p>
+    <p class="letterhead" data-l="da">Theis Dynnesen<br>Manuvision elev<br>Psykologistuderende, Københavns Universitet<br>Frederiksberg</p>
+    <p class="letterhead" data-l="en">Theis Dynnesen<br>Manuvision student<br>Psychology student, University of Copenhagen<br>Frederiksberg, Copenhagen</p>
     <div class="toplinks">
       <nav aria-label="Genveje">
-        <a href="#book">Find en tid</a>
+        <a href="#book"><span data-l="da">Find en tid</span><span data-l="en">Book a time</span></a>
         <a href="https://www.instagram.com/theis.dynnesen/">Instagram</a>
+        <button class="langswitch" type="button" data-l="da" data-switch="en" aria-label="Read this page in English" title="English">
+          <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+        </button>
+        <button class="langswitch" type="button" data-l="en" data-switch="da" aria-label="Læs siden på dansk" title="Dansk">
+          <svg viewBox="0 0 37 28" aria-hidden="true"><rect width="37" height="28" fill="#C8102E"/><rect x="12" width="4" height="28" fill="#fff"/><rect y="12" width="37" height="4" fill="#fff"/></svg>
+        </button>
       </nav>
-      <p class="draftnote">Udkast. Tekst i [klammer] mangler.</p>
+      <p class="draftnote"><span data-l="da">Udkast</span><span data-l="en">Draft</span></p>
     </div>
   </header>
 
   <main>
     <div class="opening">
       <div class="words">
-        <p class="motto">Nogle steder i os selv finder vi kun ved at mærke efter.</p>
-        <p>Jeg giver elevbehandlinger i kropsterapi på Frederiksberg. En behandling varer 75 minutter.</p>
-        <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Find en tid her.</a></p>
+        <p class="motto" data-l="da">Nogle steder i os selv finder vi kun ved at mærke efter.</p>
+        <p class="motto" data-l="en">There are places within us we only find by tuning in.</p>
+        <p data-l="da">Jeg giver elevbehandlinger i kropsterapi på Frederiksberg. En behandling varer 75 minutter.</p>
+        <p data-l="en">I offer student body therapy sessions in Frederiksberg, Copenhagen. A session lasts 75 minutes.</p>
+        <p><a href="https://cal.com/theis.dynnesen/elevbehandling"><span data-l="da">Find en tid her.</span><span data-l="en">Book a time here.</span></a></p>
       </div>
       <figure class="drawing">
         <canvas id="stipple" aria-hidden="true"></canvas>
@@ -157,60 +186,136 @@ footer {
 
     <div class="spread">
       <div class="col">
-        <section>
+        <section data-l="da">
           <h2>Hvad er en elevbehandling?</h2>
           <p>Jeg er Manuvision elev og giver Manuvision Elev kropsterapeutiske behandlinger som en del af min uddannelse. Derfor er prisen lavere end hos en færdiguddannet kropsterapeut.</p>
           <p>Jeg arbejder med massage, berøring og åndedræt, og vi taler sammen, hvis du har lyst. <strong>Du kan komme med noget bestemt eller bare med lyst til at mærke efter.</strong></p>
         </section>
-        <section>
+        <section data-l="en">
+          <h2>What is a student session?</h2>
+          <p>I'm a Manuvision student, and I give Manuvision Student body therapy sessions as part of my training. That's why the price is lower than with a fully trained body therapist.</p>
+          <p>I work with massage, touch and breathing, and we talk along the way if you want to. <strong>You can come with something specific or simply a wish to tune in.</strong></p>
+        </section>
+
+        <section data-l="da">
           <h2>Hvordan foregår det?</h2>
           <p>Vi starter med en snak om, hvordan du har det, og hvad du har lyst til i dag. Derefter ligger du på briksen i undertøj under et tæppe. <strong>Du bestemmer hele tiden</strong>, og vi kan stoppe eller gøre noget andet når som helst.</p>
           <p>Til sidst får du tid til at lande, og vi taler kort om, hvad du har mærket.</p>
         </section>
-        <section>
+        <section data-l="en">
+          <h2>How does it work?</h2>
+          <p>We start with a talk about how you're doing and what you'd like today. Then you lie on the treatment table in your underwear, under a blanket. <strong>You're in charge the whole time</strong>, and we can stop or change things whenever you like.</p>
+          <p>At the end you get time to land, and we talk briefly about what you noticed.</p>
+        </section>
+
+        <section data-l="da">
           <h2>Hvad hvis jeg bliver ked af det?</h2>
           <p>Så er der plads til det. Følelser kan dukke op, når man giver kroppen opmærksomhed, og du behøver ikke forklare dig.</p>
         </section>
-        <section>
+        <section data-l="en">
+          <h2>What if I get emotional?</h2>
+          <p>Then there's room for that. Feelings can come up when you give your body attention, and you don't need to explain yourself.</p>
+        </section>
+
+        <section data-l="da">
           <h2>Er du psykolog?</h2>
           <p>Nej. Jeg læser psykologi, men behandlingerne er kropsterapi og ikke psykologbehandling. Kropsterapi erstatter heller ikke en læge. Har du symptomer, du er bekymret for, så tal med din læge.</p>
+        </section>
+        <section data-l="en">
+          <h2>Are you a psychologist?</h2>
+          <p>No. I study psychology, but the sessions are body therapy, not psychological treatment. Body therapy doesn't replace a doctor either. If you have symptoms you're worried about, please talk to your doctor.</p>
         </section>
       </div>
 
       <div class="col">
         <img class="portrait" src="billeder/theis-portraet.jpg" alt="Portræt af Theis Dynnesen" width="800" height="1000">
-        <section>
+
+        <section data-l="da">
           <h2>Hvem er jeg?</h2>
           <p>Jeg hedder Theis. Jeg læser psykologi på Københavns Universitet og er Manuvision elev. Ved siden af er jeg musiker og lydtekniker, og mindfulness og dans fylder meget i mit liv.</p>
-          <p class="tbd">[Et par linjer med dine egne ord om, hvorfor du arbejder med kroppen.]</p>
+          <p>Jeg tror, der ligger noget i kroppen, som er svært at sætte ord på, og som vi kun finder ved at mærke efter. Det vil jeg gerne give plads til i behandlingen.</p>
         </section>
-        <section>
+        <section data-l="en">
+          <h2>Who am I?</h2>
+          <p>My name is Theis. I study psychology at the University of Copenhagen, and I'm a Manuvision student. I'm also a musician and sound engineer, and mindfulness and dance are a big part of my life.</p>
+          <p>I believe there's something in the body that's hard to put into words, something we only find by tuning in. That's what I want to make room for in our sessions.</p>
+        </section>
+
+        <section data-l="da">
           <h2>Pris</h2>
           <ul class="prices">
             <li><span>Første behandling</span><span>350 kr.</span></li>
             <li><span>Studerende og lav indkomst</span><span>350 kr.</span></li>
             <li><span>Øvrige behandlinger</span><span>450 kr.</span></li>
           </ul>
-          <p class="note">Alle behandlinger varer 75 minutter og foregår på Frederiksberg. Du får adressen, når du booker. Betaling: <span class="tbd">[MobilePay?]</span> Afbud: <span class="tbd">[senest 24 timer før?]</span></p>
+          <p class="note">Alle behandlinger varer 75 minutter og foregår på Frederiksberg. Du får adressen, når du booker. Du kan betale med MobilePay, kontant eller bankoverførsel. Afbud er gratis indtil 24 timer før. Senere afbud eller udeblivelse koster 100 kr.</p>
         </section>
-        <section id="book">
-          <h2>Find en tid</h2>
-          <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Vælg en ledig tid i min kalender.</a> Jeg bekræfter din tid hurtigst muligt.</p>
-          <p>Spørgsmål først? Skriv til mig på Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, eller på <span class="tbd">[din e-mail]</span>.</p>
+        <section data-l="en">
+          <h2>Prices</h2>
+          <ul class="prices">
+            <li><span>First session</span><span>350 kr.</span></li>
+            <li><span>Students and low income</span><span>350 kr.</span></li>
+            <li><span>Other sessions</span><span>450 kr.</span></li>
+          </ul>
+          <p class="note">All sessions last 75 minutes and take place in Frederiksberg. You'll get the address when you book. You can pay with MobilePay, cash or bank transfer. Cancelling is free up to 24 hours before. Later cancellations or no-shows cost 100 kr.</p>
         </section>
+
+        <div id="book">
+          <section data-l="da">
+            <h2>Find en tid</h2>
+            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Vælg en ledig tid i min kalender.</a> Jeg bekræfter din tid hurtigst muligt.</p>
+            <p>Spørgsmål først? Skriv til mig på Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, eller på <a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a>.</p>
+          </section>
+          <section data-l="en">
+            <h2>Book a time</h2>
+            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Choose a free time in my calendar.</a> I'll confirm your booking as soon as I can.</p>
+            <p>Questions first? Message me on Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, or email <a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a>.</p>
+          </section>
+        </div>
       </div>
     </div>
   </main>
 
   <footer>
     <span>Theis Dynnesen</span>
-    <span>Manuvision elev</span>
+    <span data-l="da">Manuvision elev</span>
+    <span data-l="en">Manuvision student</span>
     <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>
-    <a href="https://manuvision.dk/hvad-er-manuvision-kropsterapi/">Læs om Manuvision kropsterapi på manuvision.dk</a>
+    <a href="https://manuvision.dk/hvad-er-manuvision-kropsterapi/"><span data-l="da">Læs om Manuvision kropsterapi på manuvision.dk</span><span data-l="en">Read about Manuvision body therapy at manuvision.dk</span></a>
   </footer>
 </div>
 
 <script>
+/* Sprogskift: dansk som standard, #en i linket giver engelsk, og valget huskes. */
+(function () {
+  var page = document.querySelector(".page");
+  if (!page) return;
+  var KEY = "theisdynnesen-sprog";
+  function apply(lang) {
+    page.setAttribute("data-lang", lang);
+    page.setAttribute("lang", lang);
+    document.documentElement.setAttribute("lang", lang);
+    var img = page.querySelector(".portrait");
+    if (img) img.alt = lang === "en" ? "Portrait of Theis Dynnesen" : "Portræt af Theis Dynnesen";
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+  var start = "da";
+  if (location.hash === "#en") start = "en";
+  else {
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved === "en" || saved === "da") start = saved;
+    } catch (e) {}
+  }
+  apply(start);
+  var buttons = page.querySelectorAll("[data-switch]");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function (event) {
+      apply(event.currentTarget.getAttribute("data-switch"));
+    });
+  }
+})();
+
 (function () {
   var canvas = document.getElementById("stipple");
   if (!canvas || !canvas.getContext) return;
