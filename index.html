@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
 <style>
-/* Layout: brevpapir. Navn og sted øverst til venstre, én sætning og en stipletegning,
-   derefter et opslag i to spalter som i en bog. Ingen knapper, kun tekst og links.
-   Bevidst ét lyst tema: papir og blæk. Dansk og engelsk i samme side. */
+/* Layout: brevpapir på én side. Navn og sted øverst til venstre, genveje til højre,
+   én sætning og en stipletegning, et stort billede, derefter et opslag i to spalter.
+   Ingen knapper, kun tekst, links og billeder. Bevidst ét lyst tema. Dansk og engelsk. */
 :root {
   --paper: #fafaf7;
   --ink: #1c1c1a;
@@ -58,6 +58,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18e
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 p { margin: 0; }
+section[id], div[id] { scroll-margin-top: 1.5rem; }
 
 /* Brevhoved */
 .top {
@@ -69,7 +70,7 @@ p { margin: 0; }
 }
 .letterhead { line-height: 1.35; }
 .toplinks { display: grid; gap: 0.35rem; justify-items: end; }
-.toplinks nav { display: flex; align-items: center; gap: 1.25rem; }
+.toplinks nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.25rem; }
 .draftnote { font-size: 0.875rem; font-style: italic; color: var(--ink-soft); }
 @media (max-width: 559px) { .toplinks { justify-items: start; } }
 .langswitch {
@@ -112,12 +113,29 @@ p { margin: 0; }
 .drawing { margin: 0; justify-self: center; width: 100%; max-width: 34rem; }
 .drawing canvas { display: block; width: 100%; aspect-ratio: 1 / 1; max-width: 100%; }
 
+/* Stort billede */
+.band { margin: 0 0 clamp(2.75rem, 7vw, 4.5rem); }
+.band img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 40% 50%;
+  background: var(--tone);
+}
+@media (min-width: 760px) {
+  .band img { aspect-ratio: 21 / 9; object-position: 50% 20%; }
+}
+
 /* Opslaget */
 .spread { display: grid; gap: 2.75rem 4.5rem; }
 @media (min-width: 900px) {
   .spread { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 .col { min-width: 0; max-width: 34rem; display: grid; gap: 2rem; align-content: start; }
+.col > div { display: grid; gap: 2rem; }
 .col section { display: grid; gap: 0.6rem; }
 .col h2 { margin: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.25; }
 .portrait {
@@ -129,16 +147,19 @@ p { margin: 0; }
   object-fit: cover;
   background: var(--tone);
 }
-.prices { list-style: none; margin: 0; padding: 0; font-variant-numeric: tabular-nums; }
-.prices li {
+.rows { list-style: none; margin: 0; padding: 0; font-variant-numeric: tabular-nums; }
+.rows li {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.2rem 1rem;
   padding-block: 0.3rem;
   border-bottom: 1px dotted var(--ink-soft);
 }
+.rows li > span:last-child { text-align: right; min-width: 0; overflow-wrap: anywhere; }
 .note { font-size: 0.95em; color: var(--ink-soft); }
+.tbd { font-style: italic; color: var(--ink-soft); }
 
 footer {
   margin-top: clamp(3rem, 8vw, 5rem);
@@ -157,8 +178,10 @@ footer {
     <p class="letterhead" data-l="en">Theis Dynnesen<br>Manuvision student<br>Psychology student, University of Copenhagen<br>Frederiksberg, Copenhagen</p>
     <div class="toplinks">
       <nav aria-label="Genveje">
-        <a href="#book"><span data-l="da">Find en tid</span><span data-l="en">Book a time</span></a>
-        <a href="https://www.instagram.com/theis.dynnesen/">Instagram</a>
+        <a href="#behandling"><span data-l="da">Behandlingen</span><span data-l="en">The session</span></a>
+        <a href="#om"><span data-l="da">Om mig</span><span data-l="en">About me</span></a>
+        <a href="#pris"><span data-l="da">Pris</span><span data-l="en">Prices</span></a>
+        <a href="#kontakt"><span data-l="da">Kontakt</span><span data-l="en">Contact</span></a>
         <button class="langswitch" type="button" data-l="da" data-switch="en" aria-label="Read this page in English" title="English">
           <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
         </button>
@@ -184,27 +207,33 @@ footer {
       </figure>
     </div>
 
+    <figure class="band">
+      <img class="nature" src="billeder/theis-natur.jpg" alt="Theis ved en sø i solnedgang" width="1600" height="800">
+    </figure>
+
     <div class="spread">
-      <div class="col">
+      <div class="col" id="behandling">
         <section data-l="da">
           <h2>Hvad er en elevbehandling?</h2>
           <p>Jeg er Manuvision elev og giver Manuvision Elev kropsterapeutiske behandlinger som en del af min uddannelse. Derfor er prisen lavere end hos en færdiguddannet kropsterapeut.</p>
-          <p>Jeg arbejder med massage, berøring og åndedræt, og vi taler sammen, hvis du har lyst. <strong>Du kan komme med noget bestemt eller bare med lyst til at mærke efter.</strong></p>
+          <p>Jeg arbejder med massage, berøring og åndedræt, og vi taler sammen undervejs. <strong>Du kan komme med noget bestemt eller bare med lyst til at mærke efter.</strong></p>
         </section>
         <section data-l="en">
           <h2>What is a student session?</h2>
           <p>I'm a Manuvision student, and I give Manuvision Student body therapy sessions as part of my training. That's why the price is lower than with a fully trained body therapist.</p>
-          <p>I work with massage, touch and breathing, and we talk along the way if you want to. <strong>You can come with something specific or simply a wish to tune in.</strong></p>
+          <p>I work with massage, touch and breathing, and we talk along the way. <strong>You can come with something specific or simply a wish to tune in.</strong></p>
         </section>
 
         <section data-l="da">
           <h2>Hvordan foregår det?</h2>
-          <p>Vi starter med en snak om, hvordan du har det, og hvad du har lyst til i dag. Derefter ligger du på briksen i undertøj under et tæppe. <strong>Du bestemmer hele tiden</strong>, og vi kan stoppe eller gøre noget andet når som helst.</p>
+          <p>Vi starter med en snak om, hvordan du har det, og tager afsæt i, hvor du befinder dig lige nu, og hvad der bevæger sig i dig. Derefter lægger du dig på briksen i undertøj eller det, du finder komfortabelt, under et tæppe.</p>
+          <p>Jeg guider dig gennem behandlingen ud fra min uddannelse, min erfaring og det, jeg mærker i din krop. Du er med i processen hele vejen. <strong>Bliver noget for meget, er du altid velkommen til at sige det</strong>, og vi kan stoppe når som helst.</p>
           <p>Til sidst får du tid til at lande, og vi taler kort om, hvad du har mærket.</p>
         </section>
         <section data-l="en">
           <h2>How does it work?</h2>
-          <p>We start with a talk about how you're doing and what you'd like today. Then you lie on the treatment table in your underwear, under a blanket. <strong>You're in charge the whole time</strong>, and we can stop or change things whenever you like.</p>
+          <p>We start with a talk about how you're doing and take our starting point in where you are right now and what's moving in you. Then you lie down on the table in your underwear, or whatever feels comfortable, under a blanket.</p>
+          <p>I guide you through the session based on my training, my experience and what I sense in your body. You're part of the process the whole way. <strong>If something becomes too much, you're always welcome to say so</strong>, and we can stop at any time.</p>
           <p>At the end you get time to land, and we talk briefly about what you noticed.</p>
         </section>
 
@@ -228,50 +257,74 @@ footer {
       </div>
 
       <div class="col">
-        <img class="portrait" src="billeder/theis-portraet.jpg" alt="Portræt af Theis Dynnesen" width="800" height="1000">
-
-        <section data-l="da">
-          <h2>Hvem er jeg?</h2>
-          <p>Jeg hedder Theis. Jeg læser psykologi på Københavns Universitet og er Manuvision elev. Ved siden af er jeg musiker og lydtekniker, og mindfulness og dans fylder meget i mit liv.</p>
-          <p>Jeg tror, der ligger noget i kroppen, som er svært at sætte ord på, og som vi kun finder ved at mærke efter. Det vil jeg gerne give plads til i behandlingen.</p>
-        </section>
-        <section data-l="en">
-          <h2>Who am I?</h2>
-          <p>My name is Theis. I study psychology at the University of Copenhagen, and I'm a Manuvision student. I'm also a musician and sound engineer, and mindfulness and dance are a big part of my life.</p>
-          <p>I believe there's something in the body that's hard to put into words, something we only find by tuning in. That's what I want to make room for in our sessions.</p>
-        </section>
-
-        <section data-l="da">
-          <h2>Pris</h2>
-          <ul class="prices">
-            <li><span>Første behandling</span><span>350 kr.</span></li>
-            <li><span>Studerende og lav indkomst</span><span>350 kr.</span></li>
-            <li><span>Øvrige behandlinger</span><span>450 kr.</span></li>
-          </ul>
-          <p class="note">Alle behandlinger varer 75 minutter og foregår på Frederiksberg. Du får adressen, når du booker. Du kan betale med MobilePay, kontant eller bankoverførsel. Afbud er gratis indtil 24 timer før. Senere afbud eller udeblivelse koster 100 kr.</p>
-        </section>
-        <section data-l="en">
-          <h2>Prices</h2>
-          <ul class="prices">
-            <li><span>First session</span><span>350 kr.</span></li>
-            <li><span>Students and low income</span><span>350 kr.</span></li>
-            <li><span>Other sessions</span><span>450 kr.</span></li>
-          </ul>
-          <p class="note">All sessions last 75 minutes and take place in Frederiksberg. You'll get the address when you book. You can pay with MobilePay, cash or bank transfer. Cancelling is free up to 24 hours before. Later cancellations or no-shows cost 100 kr.</p>
-        </section>
-
-        <div id="book">
+        <div id="om">
+          <img class="portrait" src="billeder/theis-portraet.jpg" alt="Portræt af Theis Dynnesen" width="800" height="1000">
           <section data-l="da">
-            <h2>Find en tid</h2>
-            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Vælg en ledig tid i min kalender.</a> Jeg bekræfter din tid hurtigst muligt.</p>
-            <p>Spørgsmål først? Skriv til mig på Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, eller på <a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a>.</p>
+            <h2>Hvem er jeg?</h2>
+            <p>Jeg hedder Theis. Jeg læser psykologi på Københavns Universitet og er Manuvision elev. Mindfulness og dans fylder meget i mit liv, og jeg elsker at spille guitar, synge og skrive sange.</p>
+            <p>Nogle ting kan være svære at mærke alene, for vi mennesker har svært ved at se os selv. Vi kan rigtig meget på egen hånd, men der er også en kæmpe gave i at lade os forbinde med andre og åbne op for sider af os selv, som vi har svært ved at se alene. Det er det, jeg virkelig føler, at en behandling kan give.</p>
           </section>
           <section data-l="en">
-            <h2>Book a time</h2>
-            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Choose a free time in my calendar.</a> I'll confirm your booking as soon as I can.</p>
-            <p>Questions first? Message me on Instagram, <a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a>, or email <a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a>.</p>
+            <h2>Who am I?</h2>
+            <p>My name is Theis. I study psychology at the University of Copenhagen, and I'm a Manuvision student. Mindfulness and dance are a big part of my life, and I love playing guitar, singing and writing songs.</p>
+            <p>Some things are hard to feel on our own, because we humans find it hard to see ourselves. We can do a lot by ourselves, but there's also a huge gift in letting ourselves connect with others and opening up to sides of ourselves we struggle to see alone. That's what I truly feel a session can give.</p>
           </section>
         </div>
+
+        <div id="pris">
+          <section data-l="da">
+            <h2>Pris</h2>
+            <ul class="rows">
+              <li><span>Første behandling</span><span>350 kr.</span></li>
+              <li><span>Studerende og lav indkomst</span><span>350 kr.</span></li>
+              <li><span>Øvrige behandlinger</span><span>450 kr.</span></li>
+            </ul>
+            <p>Jeg anbefaler et forløb på fire behandlinger, så vi kan bygge videre fra gang til gang.</p>
+            <p class="note">En behandling varer 75 minutter. Du kan betale med MobilePay, kontant eller bankoverførsel. Afbud er gratis indtil 24 timer før. Senere afbud eller udeblivelse koster 100 kr.</p>
+          </section>
+          <section data-l="en">
+            <h2>Prices</h2>
+            <ul class="rows">
+              <li><span>First session</span><span>350 kr.</span></li>
+              <li><span>Students and low income</span><span>350 kr.</span></li>
+              <li><span>Other sessions</span><span>450 kr.</span></li>
+            </ul>
+            <p>I recommend a series of four sessions, so we can build on each one.</p>
+            <p class="note">A session lasts 75 minutes. You can pay with MobilePay, cash or bank transfer. Cancelling is free up to 24 hours before. Later cancellations or no-shows cost 100 kr.</p>
+          </section>
+        </div>
+
+        <div id="kontakt">
+          <section data-l="da">
+            <h2>Find en tid og kontakt</h2>
+            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Vælg en ledig tid i min kalender.</a> Jeg bekræfter din tid hurtigst muligt. Har du spørgsmål først, er du velkommen til at ringe eller skrive.</p>
+            <ul class="rows">
+              <li><span>Adresse</span><span>Bernhard Bangs Allé 25, 2000 Frederiksberg</span></li>
+              <li><span>Telefon</span><span class="tbd">[dit nummer]</span></li>
+              <li><span>Mail</span><span><a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a></span></li>
+              <li><span>Instagram</span><span><a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a></span></li>
+            </ul>
+          </section>
+          <section data-l="en">
+            <h2>Book and contact</h2>
+            <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Choose a free time in my calendar.</a> I'll confirm your booking as soon as I can. If you have questions first, feel free to call or write.</p>
+            <ul class="rows">
+              <li><span>Address</span><span>Bernhard Bangs Allé 25, 2000 Frederiksberg</span></li>
+              <li><span>Phone</span><span class="tbd">[your number]</span></li>
+              <li><span>Email</span><span><a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a></span></li>
+              <li><span>Instagram</span><span><a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a></span></li>
+            </ul>
+          </section>
+        </div>
+
+        <section data-l="da">
+          <h2>Lyt med</h2>
+          <p>Vil du vide mere om Manuvision kropsterapi, så <a href="https://manuvision.dk/podcast/">lyt til podcasten på manuvision.dk</a>.</p>
+        </section>
+        <section data-l="en">
+          <h2>Listen</h2>
+          <p>Want to know more about Manuvision body therapy? <a href="https://manuvision.dk/podcast/">Listen to the podcast at manuvision.dk</a> (in Danish).</p>
+        </section>
       </div>
     </div>
   </main>
@@ -291,12 +344,18 @@ footer {
   var page = document.querySelector(".page");
   if (!page) return;
   var KEY = "theisdynnesen-sprog";
+  var alts = {
+    portrait: { da: "Portræt af Theis Dynnesen", en: "Portrait of Theis Dynnesen" },
+    nature: { da: "Theis ved en sø i solnedgang", en: "Theis by a lake at sunset" }
+  };
   function apply(lang) {
     page.setAttribute("data-lang", lang);
     page.setAttribute("lang", lang);
     document.documentElement.setAttribute("lang", lang);
-    var img = page.querySelector(".portrait");
-    if (img) img.alt = lang === "en" ? "Portrait of Theis Dynnesen" : "Portræt af Theis Dynnesen";
+    for (var cls in alts) {
+      var img = page.querySelector("." + cls);
+      if (img) img.alt = alts[cls][lang];
+    }
     try { localStorage.setItem(KEY, lang); } catch (e) {}
   }
   var start = "da";
