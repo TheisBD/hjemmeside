@@ -159,6 +159,10 @@ section[id], div[id] { scroll-margin-top: 1.5rem; }
 }
 .rows li > span:last-child { text-align: right; min-width: 0; overflow-wrap: anywhere; }
 .note { font-size: 0.95em; color: var(--ink-soft); }
+.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.plain li::before { content: "- "; }
+.badge { display: block; width: 7rem; }
+.badge img { display: block; width: 100%; height: auto; }
 .tbd { font-style: italic; color: var(--ink-soft); }
 
 footer {
@@ -224,6 +228,33 @@ footer {
           <p>I work with massage, touch and breathing, and we talk along the way. <strong>You can come with something specific or simply a wish to tune in.</strong></p>
         </section>
 
+        <a class="badge" href="https://manuvision.dk/hvad-er-manuvision-kropsterapi/"><img src="billeder/manuvision-elev-logo.png" alt="Manuvision elevbehandling" width="240" height="240"></a>
+
+        <section data-l="da">
+          <h2>Hvad kan du komme med?</h2>
+          <p>Det kan fx være:</p>
+          <ul class="plain">
+            <li>stress, uro eller tvivl</li>
+            <li>sorg eller noget, der fylder</li>
+            <li>spændinger i kroppen</li>
+            <li>en følelse af at sidde fast</li>
+            <li>et ønske om at mærke din krop</li>
+          </ul>
+          <p>Eller bare en nysgerrighed på, hvad der sker, når du giver dig selv tid.</p>
+        </section>
+        <section data-l="en">
+          <h2>What can you come with?</h2>
+          <p>It could be:</p>
+          <ul class="plain">
+            <li>stress, restlessness or doubt</li>
+            <li>grief or something weighing on you</li>
+            <li>tension in your body</li>
+            <li>a feeling of being stuck</li>
+            <li>a wish to feel your body</li>
+          </ul>
+          <p>Or simply curiosity about what happens when you give yourself time.</p>
+        </section>
+
         <section data-l="da">
           <h2>Hvordan foregår det?</h2>
           <p>Vi starter med en snak om, hvordan du har det, og tager afsæt i, hvor du befinder dig lige nu, og hvad der bevæger sig i dig. Derefter lægger du dig på briksen i undertøj eller det, du finder komfortabelt, under et tæppe.</p>
@@ -278,8 +309,9 @@ footer {
               <li><span>Første behandling</span><span>350 kr.</span></li>
               <li><span>Studerende og lav indkomst</span><span>350 kr.</span></li>
               <li><span>Øvrige behandlinger</span><span>450 kr.</span></li>
+              <li><span>Forløb på fire behandlinger</span><span>1.600 kr.</span></li>
             </ul>
-            <p>Jeg anbefaler et forløb på fire behandlinger, så vi kan bygge videre fra gang til gang.</p>
+            <p>Jeg anbefaler et forløb på fire behandlinger, så vi kan bygge videre fra gang til gang. Studerende og lav indkomst betaler 350 kr. pr. behandling, også i et forløb.</p>
             <p class="note">En behandling varer 75 minutter. Du kan betale med MobilePay, kontant eller bankoverførsel. Afbud er gratis indtil 24 timer før. Senere afbud eller udeblivelse koster 100 kr.</p>
           </section>
           <section data-l="en">
@@ -288,8 +320,9 @@ footer {
               <li><span>First session</span><span>350 kr.</span></li>
               <li><span>Students and low income</span><span>350 kr.</span></li>
               <li><span>Other sessions</span><span>450 kr.</span></li>
+              <li><span>Series of four sessions</span><span>1,600 kr.</span></li>
             </ul>
-            <p>I recommend a series of four sessions, so we can build on each one.</p>
+            <p>I recommend a series of four sessions, so we can build on each one. Students and people on a low income pay 350 kr. per session, also in a series.</p>
             <p class="note">A session lasts 75 minutes. You can pay with MobilePay, cash or bank transfer. Cancelling is free up to 24 hours before. Later cancellations or no-shows cost 100 kr.</p>
           </section>
         </div>
@@ -300,7 +333,7 @@ footer {
             <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Vælg en ledig tid i min kalender.</a> Jeg bekræfter din tid hurtigst muligt. Har du spørgsmål først, er du velkommen til at ringe eller skrive.</p>
             <ul class="rows">
               <li><span>Adresse</span><span>Bernhard Bangs Allé 25, 2000 Frederiksberg</span></li>
-              <li><span>Telefon</span><span class="tbd">[dit nummer]</span></li>
+              <li><span>Telefon</span><span><a href="tel:+4561719616">61 71 96 16</a></span></li>
               <li><span>Mail</span><span><a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a></span></li>
               <li><span>Instagram</span><span><a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a></span></li>
             </ul>
@@ -310,7 +343,7 @@ footer {
             <p><a href="https://cal.com/theis.dynnesen/elevbehandling">Choose a free time in my calendar.</a> I'll confirm your booking as soon as I can. If you have questions first, feel free to call or write.</p>
             <ul class="rows">
               <li><span>Address</span><span>Bernhard Bangs Allé 25, 2000 Frederiksberg</span></li>
-              <li><span>Phone</span><span class="tbd">[your number]</span></li>
+              <li><span>Phone</span><span><a href="tel:+4561719616">+45 61 71 96 16</a></span></li>
               <li><span>Email</span><span><a href="mailto:theis-bodal@hotmail.com">theis-bodal@hotmail.com</a></span></li>
               <li><span>Instagram</span><span><a href="https://www.instagram.com/theis.dynnesen/">@theis.dynnesen</a></span></li>
             </ul>
